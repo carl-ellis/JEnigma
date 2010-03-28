@@ -5,16 +5,16 @@ package jenigma;
 public class Enigma {
 
 	/** Right rotor */
-	Rotor right = null;
+	public Rotor right = null;
 
 	/** Middle rotor */
-	Rotor middle = null;
+	public Rotor middle = null;
 
 	/** Left rotor */
-	Rotor left = null;
+	public Rotor left = null;
 
 	/** Reflector */
-	Reflector ref = null;
+	public Reflector ref = null;
 
 	/** Constructor for the enigma machine.
 	  *
@@ -85,8 +85,22 @@ public class Enigma {
 
 	public String toString(){
 
-		return "R:" + right.getPosition() + " M: " + middle.getPosition() + " L: " + left.getPosition();
+		return "R:" + right.getName() + ":" + right.getPosition() + " M:" + middle.getName() + ":" + middle.getPosition()
+      + " L:" + left.getName() + ":" + left.getPosition();
 	}
+
+  public void reset(){
+    right.reset();
+    middle.reset();
+    left.reset();
+  }
+
+  public void setPositions(int lp, int mp, int rp){
+    right.setPosition(lp);
+    middle.setPosition(mp);
+    left.setPosition(rp);
+  }
+    
 }
 
 

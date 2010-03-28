@@ -4,7 +4,7 @@ package jenigma;
 public class Rotor {
 
 	/** Number of letters */
-	protected static final int NUMBER_OF_LETTERS = 26;
+	public static final int NUMBER_OF_LETTERS = 26;
 
 	/** Decribes the transformations of the cog */
 	protected int[] permutations = null;
@@ -24,6 +24,9 @@ public class Rotor {
 	/** The random seed used to create the permutations */
 	private int seed = 1;
 
+  /** The initial position of the rotor */
+  private int initPos = 0;
+
 	/** Hidden constructor for subclasses */
 	protected Rotor(){
 		this.permutations = new int[NUMBER_OF_LETTERS];
@@ -41,6 +44,7 @@ public class Rotor {
 		this.seed = seed;
 		this.spin = spin;
 		this.position = position;
+		this.initPos = position;
 		this.permutations = new int[NUMBER_OF_LETTERS];
 		this.rPermutations = new int[NUMBER_OF_LETTERS];
 
@@ -114,17 +118,42 @@ public class Rotor {
 		return (this.rPermutations[index] - position < 0) ? NUMBER_OF_LETTERS + (this.rPermutations[index] - position) : this.rPermutations[index] - position;
 	}
 
-	public String toString(){
-		String output = "";
-		for(int i=0;i<NUMBER_OF_LETTERS;i++){
-			output += i + " -> " + this.transform(i) + " || " + i + " -> " + this.reverseEncode(i) + '\n';
-		}
-		return output;
-	}
-
+  /** Gets the current position of the rotor.
+    *
+    * @return         current position
+    */
 	public int getPosition(){
 		return this.position;
 	}
+
+  /** Gets the name of the rotor.
+    *
+    * @return         name
+    */
+  public int getName(){
+    return this.seed;
+  }
+
+  /** Resets the rotor back to its initial position.
+    */
+  public void reset(){
+    this.position = initPos;
+    this.cEntries = 0;
+  }
+
+  /** Resets the rotor to another position.
+    *
+    * @param  position      Rotor position
+    */
+  public void setPosition(int position){
+    this.initPos = position;
+    this.reset();
+  }
+
+  public int[] getPermutations(){
+    return this.permutations;
+  }
+
 }
 
 
